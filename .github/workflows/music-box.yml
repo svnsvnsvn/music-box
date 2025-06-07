@@ -1,18 +1,50 @@
+# name: music-box
+# on:
+#   schedule:
+#     - cron: '0 * * * *'  # hourly
+#   push:
+#     branches: master
+# jobs:
+#   musicbox:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - run: npm install
+#      - name: Update
+#        uses: ./
+#        env:
+#           LASTFM_KEY: ${{ secrets.LASTFM_KEY }}
+#           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+#           LFMUSERNAME: ${{ secrets.LFMUSERNAME }}
+#           GIST_ID: ${{ secrets.GIST_ID }}
+
+
 name: music-box
+
 on:
   schedule:
-    - cron: '0 * * * *'  # hourly
+    - cron: '0 * * * *'  # runs every hour
   push:
-    branches: master
+    branches:
+      - master
+  workflow_dispatch:        
+
 jobs:
   musicbox:
-   runs-on: ubuntu-latest
-   steps:
-     - uses: actions/checkout@v2
-     - run: npm install
-     - name: Update
-       uses: ./
-       env:
+    name: Update Music Box Gist
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - run: npm install
+
+      - name: Update
+        uses: ./
+        env:
           LASTFM_KEY: ${{ secrets.LASTFM_KEY }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           LFMUSERNAME: ${{ secrets.LFMUSERNAME }}
