@@ -33,6 +33,7 @@ jobs:
   musicbox:
     name: Update Music Box Gist
     runs-on: ubuntu-latest
+    environment: music-box
     steps:
       - uses: actions/checkout@v2
 
