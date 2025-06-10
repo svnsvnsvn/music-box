@@ -2,8 +2,8 @@ name: music-box
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 🔁 runs once a day at midnight UTC
-  workflow_dispatch:       # ✅ allows manual testing (no notifications)
+    - cron: '0 0 * * *'  
+  workflow_dispatch:       
 
 jobs:
   musicbox:
